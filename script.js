@@ -16,19 +16,11 @@ const pieces = document.querySelectorAll('.canvasPiece');
 
 
 
-pieces.forEach((piece) => {piece.addEventListener('mousedown',function(e){piece.clicked=true;
-checkEvents(piece)})});
+pieces.forEach((piece) => {piece.addEventListener('mouseover',changeColor)});
+pieces.forEach((piece) => {piece.addEventListener('mousedown',changeColor)});
 
-pieces.forEach((piece) => {piece.addEventListener('mouseup',function(e){piece.clicked=false})});
-
-pieces.forEach((piece) => {piece.addEventListener('mouseenter',function(e){piece.hover=true;if(e.buttons == 1){changeColor(piece)};}));
-
-function changeColor(el){
-    el.style.backgroundColor='purple';
-};
-
-function checkEvents(el){
-    if(el.hover && el.clicked){
-      el.style.backgroundColor = 'purple';
+function changeColor(e){
+    if ((e.buttons==1 && e.type==='mouseover')||e.type==='mousedown'){
+        e.target.style.backgroundColor='purple'; 
     };
 };
