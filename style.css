@@ -7,14 +7,15 @@
 }
 
 .canvas {
-    margin: 2in;
     border-color: black;
+    height: 700px;
+    width: 700px;
+    background-color: aqua;
     display: flex;
+    flex-wrap: wrap;
 }
 
 .canvasPiece {
     background-color: blue;
     border-color: brown;
-    width: auto;
-    height: auto;
 }
