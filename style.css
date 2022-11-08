@@ -1,0 +1,20 @@
+
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.canvas {
+    margin: 2in;
+    border-color: black;
+    display: flex;
+}
+
+.canvasPiece {
+    background-color: blue;
+    border-color: brown;
+    width: auto;
+    height: auto;
+}
