@@ -1,26 +1,53 @@
 const canvas = document.querySelector('.canvas');
-const width_height = 10;
+const color_input = document.querySelector('#color');
+const grid_input = document.querySelector('#grid_wd_ht');
+const width_height = 20;
+let color = 'black';
 
-for (let i=0;i<width_height**2;i++){
-    const new_div = document.createElement('div');
-    new_div.className = 'canvasPiece';
-    new_div.style.width=`${canvas.clientWidth/width_height}px`;
-    new_div.style.height=`${canvas.clientHeight/width_height}px`;
-    //new_div.textContent = `${i}`;
+updateGrid();
 
-    canvas.appendChild(new_div);
-};
+//Update grid whenever text is entered
+grid_input.addEventListener('keyup',updateGrid);
+//Update color whenever text is entered
+color_input.addEventListener('keyup',()=>{color=color_input.value});
 
-const pieces = document.querySelectorAll('.canvasPiece');
-//pieces.forEach((piece) => {piece.addEventListener('mouseenter',function(){piece.style.backgroundColor='purple'})});
+//FUNCTIONS
 
-
-
-pieces.forEach((piece) => {piece.addEventListener('mouseover',changeColor)});
-pieces.forEach((piece) => {piece.addEventListener('mousedown',changeColor)});
-
+//change color of div based on event
 function changeColor(e){
     if ((e.buttons==1 && e.type==='mouseover')||e.type==='mousedown'){
-        e.target.style.backgroundColor='purple'; 
+        e.target.style.backgroundColor=color; 
     };
+};
+
+//Grab each piece of canvas and change color if mouse is clicked and/or draged
+function addCanvasEventListeners(){
+    const pieces = document.querySelectorAll('.canvasPiece');
+    pieces.forEach((piece) => {piece.addEventListener('mouseover',changeColor)});
+    pieces.forEach((piece) => {piece.addEventListener('mousedown',changeColor)});
+};
+
+//creates the grid
+function updateGrid(){
+
+    deleteCanvas();
+
+    const grid_input = document.querySelector('#grid_wd_ht');
+    const width_height = parseInt(grid_input.value);
+
+    for (let i=0;i<width_height**2;i++){
+        const new_div = document.createElement('div');
+        new_div.className = 'canvasPiece';
+        new_div.style.width=`${canvas.clientWidth/width_height}px`;
+        new_div.style.height=`${canvas.clientHeight/width_height}px`;
+        canvas.appendChild(new_div);
+    };
+
+    addCanvasEventListeners();
+};
+
+//deletes canvas
+function deleteCanvas(){
+    const currentCanvas = document.querySelectorAll('.canvasPiece');
+    currentCanvas.forEach(piece=>{piece.remove()});
 };
