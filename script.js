@@ -30,20 +30,24 @@ function addCanvasEventListeners(){
 //creates the grid
 function updateGrid(){
 
-    deleteCanvas();
-
     const grid_input = document.querySelector('#grid_wd_ht');
     const width_height = parseInt(grid_input.value);
 
-    for (let i=0;i<width_height**2;i++){
-        const new_div = document.createElement('div');
-        new_div.className = 'canvasPiece';
-        new_div.style.width=`${canvas.clientWidth/width_height}px`;
-        new_div.style.height=`${canvas.clientHeight/width_height}px`;
-        canvas.appendChild(new_div);
-    };
+    if (width_height > 100){
+        alert('Max size is 100. Please enter a smaller width/height.');
+    } else {
+        deleteCanvas();
 
-    addCanvasEventListeners();
+        for (let i=0;i<width_height**2;i++){
+            const new_div = document.createElement('div');
+            new_div.className = 'canvasPiece';
+            new_div.style.width=`${canvas.clientWidth/width_height}px`;
+            new_div.style.height=`${canvas.clientHeight/width_height}px`;
+            canvas.appendChild(new_div);
+        };
+    
+        addCanvasEventListeners();
+    };
 };
 
 //deletes canvas
